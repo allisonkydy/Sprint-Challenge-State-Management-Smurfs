@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
+import SmurfForm from './SmurfForm';
 import "./App.css";
 import { getSmurfs } from '../actions';
 
@@ -21,6 +22,7 @@ function App() {
   return (
     <div className="App">
       <h1>smurf village</h1>
+      <SmurfForm />
       {smurfs.map(smurf => {
         return (
           <div>
