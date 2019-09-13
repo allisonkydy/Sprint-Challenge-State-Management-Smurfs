@@ -31,3 +31,18 @@ export const addSmurf = newSmurf => dispatch => {
       dispatch({ type: POST_ERROR, payload: err.response.status });
     });
 };
+
+export const DELETE_START = "DELETE_START";
+export const DELETE_SUCCESS = "DELETE_SUCCESS";
+export const DELETE_ERROR = "DELETE_ERROR";
+
+export const deleteSmurf = id => dispatch => {
+  dispatch({ type: DELETE_START });
+  axios.delete(`http://localhost:3333/smurfs/${id}`)
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_ERROR, payload: err.response.status });
+    })
+}
