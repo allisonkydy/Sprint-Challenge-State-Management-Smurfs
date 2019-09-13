@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
-import SmurfForm from './SmurfForm';
+import SmurfForm from "./SmurfForm";
 import "./App.css";
-import { getSmurfs } from '../actions';
+import { getSmurfs } from "../actions";
 
 function App() {
   const dispatch = useDispatch();
@@ -14,13 +14,16 @@ function App() {
 
   useEffect(() => {
     dispatch(getSmurfs());
-  }, [dispatch])
+  }, [dispatch]);
 
-  if (isFetching) return <h2>loading...</h2>
+  if (isFetching) return <h2>loading...</h2>;
 
-  if (isPosting) return <h2>adding smurf...</h2>
+  if (isPosting) return <h2>adding smurf...</h2>;
 
-  if (error) return <img src={`https://http.cat/${error}`} alt={`error code: ${error}`} />
+  if (error)
+    return (
+      <img src={`https://http.cat/${error}`} alt={`error code: ${error}`} />
+    );
 
   return (
     <div className="App">
@@ -33,7 +36,7 @@ function App() {
             <p>Age: {smurf.age} years</p>
             <p>Height: {smurf.height}</p>
           </div>
-        )
+        );
       })}
     </div>
   );
