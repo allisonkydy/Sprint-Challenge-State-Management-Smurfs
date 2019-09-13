@@ -39,6 +39,12 @@ export const reducer = (state = initialState, action) => {
       smurfs: [...action.payload],
       isPosting: false
     }
+    case POST_ERROR:
+      return {
+        ...state,
+        isPosting: false,
+        error: action.payload
+      }
     default:
       return state;
   }

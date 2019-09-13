@@ -25,5 +25,7 @@ export const addSmurf = (newSmurf) => dispatch => {
     .then(res => {
       dispatch({ type: POST_SUCCESS, payload: res.data})
     })
-    .catch(err => console.log(err))
+    .catch(err => {
+      dispatch({ type: POST_ERROR, payload: err.response.status})      
+    })
 }
