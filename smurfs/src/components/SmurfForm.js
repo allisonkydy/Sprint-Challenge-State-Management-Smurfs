@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
+import { addSmurf } from '../actions';
 
 function SmurfForm() {
   const [input, setInput] = useState({ name: "", age: "", height: "" });
+  const dispatch = useDispatch();
 
   const handleInputChange = e => {
     setInput({...input, [e.target.name]: e.target.value})
@@ -9,7 +13,7 @@ function SmurfForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // TODO: post smurf
+    dispatch(addSmurf({...input, height: `${input.height}cm`, id: Date.now() }))
     setInput({ name: "", age: "", height: "" });
   }
 
