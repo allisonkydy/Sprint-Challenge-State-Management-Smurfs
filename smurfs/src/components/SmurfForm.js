@@ -19,7 +19,7 @@ function SmurfForm() {
         addSmurf({ ...input, id: Date.now() })
       );
     } else {
-      // dispatch(editSmurf());
+      dispatch(editSmurf(input));
     }
     setInput({ name: "", age: "", height: "" });
   };

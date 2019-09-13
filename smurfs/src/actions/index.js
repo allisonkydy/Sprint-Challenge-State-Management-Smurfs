@@ -52,3 +52,21 @@ export const SET_SMURF_TO_EDIT = "SET_SMURF_TO_EDIT";
 export const setSmurfToEdit = smurf => {
   return { type: SET_SMURF_TO_EDIT, payload: smurf }
 }
+
+export const PUT_START = "PUT_START";
+export const PUT_SUCCESS = "PUT_SUCCESS";
+export const PUT_ERROR = "PUT_ERROR";
+
+export const editSmurf = smurf => dispatch => {
+  dispatch({ type: PUT_START });
+  axios.put(`http://localhost:3333/smurfs/${smurf.id}`, smurf)
+    .then(res => {
+      dispatch({ type: PUT_SUCCESS, payload: res.data })
+    })
+    .catch(err => {
+      dispatch({ type: PUT_ERROR, payload: err.response.status });
+    })
+    .finally(() => {
+      dispatch(setSmurfToEdit(null));
+    })
+}
