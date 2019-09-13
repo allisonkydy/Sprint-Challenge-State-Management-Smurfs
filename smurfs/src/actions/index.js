@@ -46,3 +46,9 @@ export const deleteSmurf = id => dispatch => {
       dispatch({ type: DELETE_ERROR, payload: err.response.status });
     })
 }
+
+export const SET_SMURF_TO_EDIT = "SET_SMURF_TO_EDIT";
+
+export const setSmurfToEdit = smurf => {
+  return { type: SET_SMURF_TO_EDIT, payload: smurf }
+}

@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import { addSmurf } from "../actions";
+import { addSmurf, editSmurf } from "../actions";
 
 function SmurfForm() {
   const [input, setInput] = useState({ name: "", age: "", height: "" });
   const dispatch = useDispatch();
+  const smurfToEdit = useSelector(state => state.smurfToEdit);
 
   const handleInputChange = e => {
     setInput({ ...input, [e.target.name]: e.target.value });
@@ -13,11 +14,19 @@ function SmurfForm() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(
-      addSmurf({ ...input, height: `${input.height}cm`, id: Date.now() })
-    );
+    if (!smurfToEdit) {
+      dispatch(
+        addSmurf({ ...input, id: Date.now() })
+      );
+    } else {
+      // dispatch(editSmurf());
+    }
     setInput({ name: "", age: "", height: "" });
   };
+
+  useEffect(() => {
+    if (smurfToEdit) setInput({...smurfToEdit});
+  }, [smurfToEdit])
 
   return (
     <form onSubmit={handleSubmit}>
@@ -47,11 +56,11 @@ function SmurfForm() {
           name="height"
           value={input.height}
           onChange={handleInputChange}
-          type="number"
+          type="text"
           placeholder="height in cm"
         />
       </label>
-      <button>add smurf</button>
+      <button>{smurfToEdit ? 'edit smurf' : 'add smurf'}</button>
     </form>
   );
 }
