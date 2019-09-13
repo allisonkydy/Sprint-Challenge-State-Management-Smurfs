@@ -40,7 +40,7 @@ export const deleteSmurf = id => dispatch => {
   dispatch({ type: DELETE_START });
   axios.delete(`http://localhost:3333/smurfs/${id}`)
     .then(res => {
-      console.log(res)
+      dispatch({ type: DELETE_SUCCESS, payload: res.data })
     })
     .catch(err => {
       dispatch({ type: DELETE_ERROR, payload: err.response.status });
