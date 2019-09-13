@@ -7,12 +7,15 @@ import { getSmurfs } from '../actions';
 function App() {
   const dispatch = useDispatch();
   const isFetching = useSelector(state => state.isFetching);
+  const error = useSelector(state => state.error);
 
   useEffect(() => {
     dispatch(getSmurfs());
   }, [dispatch])
 
   if (isFetching) return <h2>loading...</h2>
+
+  if (error) return <img src={`https://http.cat/${error}`} alt={`error code: ${error}`} />
 
   return (
     <div className="App">
